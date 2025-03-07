@@ -1,0 +1,14 @@
+src/
+│── features/
+│   ├── v1/
+│   │   ├── user/
+│   │   │   ├── domain/           # 📌 Regras de negócio
+│   │   │   │   ├── user.entity.ts
+│   │   │   │   ├── user.repository.ts
+│   │   │   │   ├── user.service.ts
+│   │   │   ├── infrastructure/    # 📌 Implementação específica do banco
+│   │   │   │   ├── prisma.user.repository.ts
+│   │   │   ├── presentation/      # 📌 API (controllers, rotas)
+│   │   │   │   ├── user.controller.ts
+│   │   │   │   ├── user.routes.ts
+

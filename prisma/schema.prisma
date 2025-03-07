@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ====== Modelos de User ======
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  cpf          String        @unique
+  amount       Float
+  username     String        @unique
+  password     String
+
+  transactions Transaction[] // Um usuário pode ter várias transações
+  expenses     Expense[]      // Um usuário pode ter várias despesas
+}
+
+// ====== Modelos de Transaction ======
+model Transaction {
+  id       String    @id @default(cuid())
+  type     String
+  valor    Float
+  date     DateTime
+  userId   String
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ====== Modelos de Expense ======
+model Expense {
+  id       String  @id @default(cuid())
+  name     String
+  type     String
+  duration Int
+  valor    Float
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
